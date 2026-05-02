@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CredStellar - Credit Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c8c5d0",
+                        "surface-container-high": "#e7e8e9",
+                        "tertiary": "#000000",
+                        "on-tertiary-container": "#32963b",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#002204",
+                        "outline": "#78767f",
+                        "surface-dim": "#d9dadb",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-fixed-variant": "#43426f",
+                        "background": "#f8f9fa",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-bright": "#f8f9fa",
+                        "secondary-fixed": "#dce1ff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#c3c1f7",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#fffbff",
+                        "secondary-fixed-dim": "#b6c4ff",
+                        "on-secondary-fixed-variant": "#003ab2",
+                        "primary": "#000000",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#78dc77",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#c3c1f7",
+                        "on-tertiary-fixed-variant": "#005313",
+                        "surface-variant": "#e1e3e4",
+                        "tertiary-container": "#002204",
+                        "surface": "#f8f9fa",
+                        "on-secondary-fixed": "#001550",
+                        "primary-container": "#171641",
+                        "surface-tint": "#5a5a88",
+                        "on-surface": "#191c1d",
+                        "on-primary-fixed": "#171641",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#1a4fd6",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary-fixed": "#94f990",
+                        "on-surface-variant": "#47464e",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#807fb0",
+                        "on-background": "#191c1d",
+                        "secondary-container": "#3e6af0",
+                        "primary-fixed": "#e2dfff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body antialiased min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f8f9fa] shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-xl mx-auto">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="close up portrait of young professional woman with natural lighting and soft blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE8T-EzVLdceFAoCm0rHc2DK0L0TdV_A4eymTD0tnqLpy66ysC5NTgAivPPmZYGl5WQd0eephk8IHFpFbPXy3oLKtaAkPLHcuIr8NnuO2hGgEfNDU8_vu4YUAN0w2LJkELPugICUr17FONNXoTlkkKxrEb6j3a3letL9_GvQF1J392rOXzkaq5R-Mo7DrNPWxhbWToOnrRLfC2WDZ7PURL227hcI_bRQsrpEykurrvwb7lWzFQjcnDFAUJmQCNWq0oQvXW3HV6Byo"/>
+</div>
+<h1 class="font-manrope font-extrabold text-[#080633] tracking-tighter text-2xl">CredStellar</h1>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-low text-[#080633] hover:bg-[#e7e8e9] transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-28 px-6 max-w-screen-md mx-auto flex flex-col gap-12">
+<!-- Header -->
+<section class="flex flex-col gap-2">
+<h2 class="font-headline text-[3.5rem] leading-tight font-extrabold tracking-tighter text-on-surface">Manage<br/>Credit Power</h2>
+<p class="font-body text-on-surface-variant text-sm">Your credit line is backed by your Stellar assets.</p>
+</section>
+<!-- Credit Utilization (Bento Container) -->
+<section class="bg-surface-container-low rounded-[1.5rem] p-6 flex flex-col gap-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+<!-- Total Power & Bar -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-end">
+<div class="flex flex-col">
+<span class="font-label text-sm text-on-surface-variant font-medium">Available Credit</span>
+<span class="font-headline text-4xl font-bold tracking-tight text-on-surface">$12,450.00</span>
+</div>
+<span class="font-label text-xs font-bold text-secondary mb-1">35% Utilized</span>
+</div>
+<!-- Signature Credit Bar -->
+<div class="h-1.5 bg-surface-container-highest rounded-full w-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-secondary-fixed-dim w-[35%] rounded-full"></div>
+</div>
+<div class="flex justify-between text-xs font-label text-on-surface-variant">
+<span>Used: $4,357.50</span>
+<span>Limit: $16,807.50</span>
+</div>
+</div>
+<!-- Currency Breakdown (Nested Cards) -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col gap-1">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">USD Fiat</span>
+<span class="font-headline text-lg font-bold text-on-surface">$4,500.00</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col gap-1 relative overflow-hidden">
+<div class="absolute inset-0 bg-secondary opacity-[0.03]"></div>
+<span class="font-label text-[10px] uppercase tracking-widest text-secondary font-bold">XLM Backed</span>
+<span class="font-headline text-lg font-bold text-on-surface">11,200 XLM</span>
+</div>
+</div>
+</section>
+<!-- Active Fixed Deposits -->
+<section class="flex flex-col gap-6">
+<div class="flex justify-between items-end">
+<h3 class="font-headline text-2xl font-bold tracking-tight text-on-surface">Active Deposits</h3>
+<span class="font-label text-sm font-medium text-secondary hover:underline cursor-pointer">View All</span>
+</div>
+<div class="flex flex-col gap-4">
+<!-- FD Card 1 -->
+<div class="bg-surface-container-lowest rounded-[1.5rem] p-5 flex justify-between items-center shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-outline-variant/15">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline font-bold text-on-surface">Stellar Vault Alpha</span>
+<span class="font-body text-xs text-on-surface-variant">Matures Oct 24, 2024</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-headline font-bold text-lg text-on-surface">$5,000.00</span>
+<div class="bg-tertiary-container text-on-tertiary-container px-2.5 py-0.5 rounded-full font-label text-[10px] font-bold uppercase tracking-wider">
+                            5.5% APY
+                        </div>
+</div>
+</div>
+<!-- FD Card 2 -->
+<div class="bg-surface-container-lowest rounded-[1.5rem] p-5 flex justify-between items-center shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-outline-variant/15">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline font-bold text-on-surface">Yield Lock Beta</span>
+<span class="font-body text-xs text-on-surface-variant">Matures Jan 15, 2025</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-headline font-bold text-lg text-on-surface">3,450 XLM</span>
+<div class="bg-tertiary-container text-on-tertiary-container px-2.5 py-0.5 rounded-full font-label text-[10px] font-bold uppercase tracking-wider">
+                            4.2% APY
+                        </div>
+</div>
+</div>
+</div>
+<!-- Add New FD CTA -->
+<button class="mt-4 w-full py-4 px-6 bg-gradient-to-br from-primary-container to-primary text-on-primary rounded-[1.25rem] font-headline font-bold text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+<span class="material-symbols-outlined">add_circle</span>
+                Add New FD
+            </button>
+<p class="text-center font-body text-xs text-on-surface-variant">Adding a new Fixed Deposit instantly increases your available credit line.</p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 backdrop-blur-xl rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.08)]">
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-[#1a4fd6] transition-all" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-inter text-[11px] font-semibold uppercase tracking-wider">Dashboard</span>
+</a>
+<!-- Active Item (Credit) -->
+<a class="flex flex-col items-center justify-center bg-[#f3f4f5] text-[#080633] rounded-2xl px-5 py-2" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-inter text-[11px] font-semibold uppercase tracking-wider text-[#1a4fd6]">Credit</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-[#1a4fd6] transition-all" href="#">
+<span class="material-symbols-outlined mb-1">qr_code_scanner</span>
+<span class="font-inter text-[11px] font-semibold uppercase tracking-wider">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-[#1a4fd6] transition-all" href="#">
+<span class="material-symbols-outlined mb-1">receipt_long</span>
+<span class="font-inter text-[11px] font-semibold uppercase tracking-wider">History</span>
+</a>
+</nav>
+</body></html>

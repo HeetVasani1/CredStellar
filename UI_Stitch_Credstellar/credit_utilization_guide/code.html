@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Credit Utilization Guide</title>
+<!-- Google Fonts: Manrope & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#3e6af0",
+                        "primary-container": "#171641",
+                        "tertiary-fixed": "#94f990",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#c3c1f7",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f0f1f2",
+                        "tertiary-fixed-dim": "#78dc77",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#dce1ff",
+                        "on-secondary-fixed": "#001550",
+                        "tertiary-container": "#002204",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#e2dfff",
+                        "outline-variant": "#c8c5d0",
+                        "surface-tint": "#5a5a88",
+                        "on-secondary-fixed-variant": "#003ab2",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-container": "#32963b",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container": "#edeeef",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f8f9fa",
+                        "background": "#f8f9fa",
+                        "outline": "#78767f",
+                        "inverse-primary": "#c3c1f7",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-surface": "#191c1d",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed-variant": "#43426f",
+                        "surface-container-high": "#e7e8e9",
+                        "on-tertiary-fixed": "#002204",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#47464e",
+                        "secondary": "#1a4fd6",
+                        "on-primary-fixed": "#171641",
+                        "inverse-surface": "#2e3132",
+                        "secondary-fixed-dim": "#b6c4ff",
+                        "primary": "#000000",
+                        "surface": "#f8f9fa",
+                        "on-primary-container": "#807fb0",
+                        "on-error": "#ffffff",
+                        "on-background": "#191c1d",
+                        "tertiary": "#000000",
+                        "on-tertiary-fixed-variant": "#005313",
+                        "surface-dim": "#d9dadb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3 {
+            font-family: 'Manrope', sans-serif;
+        }
+        .glass-header {
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 h-16 bg-slate-50/80 dark:bg-[#080633]/80 backdrop-blur-2xl shadow-sm shadow-[#191c1d]/5">
+<div class="flex items-center gap-4">
+<button class="hover:bg-slate-200/50 dark:hover:bg-white/10 transition-colors scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-black dark:text-white">arrow_back</span>
+</button>
+<h1 class="font-manrope font-bold tracking-tight text-lg text-black dark:text-white">Utilization Guide</h1>
+</div>
+<button class="hover:bg-slate-200/50 dark:hover:bg-white/10 transition-colors scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-black dark:text-white">more_vert</span>
+</button>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto space-y-10 pb-10">
+<!-- Current Status Section -->
+<section class="space-y-6">
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm shadow-[#191c1d]/4">
+<div class="flex justify-between items-start mb-4">
+<div class="space-y-1">
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-widest font-semibold">Current Utilization</p>
+<h2 class="text-6xl font-headline font-extrabold tracking-tighter text-primary">35%</h2>
+</div>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-4 py-1 rounded-full font-label text-xs font-bold uppercase tracking-wider">Fair</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">
+                    Your utilization is slightly above the recommended threshold. Reducing your balance by <span class="text-secondary font-bold">$420</span> will move you into the "Good" range.
+                </p>
+<!-- Visual Gauge -->
+<div class="space-y-3">
+<div class="flex justify-between text-[10px] font-label font-bold uppercase tracking-widest text-on-surface-variant">
+<span>Ideal (0-30%)</span>
+<span>Caution (31-60%)</span>
+<span>High (60%+)</span>
+</div>
+<div class="relative h-2 w-full bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-tertiary-fixed-dim" style="width: 30%;"></div>
+<div class="h-full bg-[#fdd835]" style="width: 30%;"></div>
+<div class="h-full bg-error" style="width: 40%;"></div>
+</div>
+<!-- Indicator Marker -->
+<div class="relative w-full">
+<div class="absolute flex flex-col items-center" style="left: 35%; transform: translateX(-50%);">
+<div class="w-1 h-3 bg-primary mb-1"></div>
+<span class="text-[10px] font-black text-primary bg-white px-2 py-0.5 rounded shadow-sm">YOU</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Educational Content -->
+<section class="space-y-4">
+<h3 class="text-2xl font-headline font-bold text-primary-container">What is Credit Utilization?</h3>
+<div class="bg-surface-container-low rounded-xl p-6">
+<p class="text-on-surface-variant leading-relaxed font-body">
+                    Credit utilization represents the percentage of your total available credit that you are currently using. It's one of the most impactful factors in calculating your credit score. Lenders view lower utilization as a sign of financial stability and responsible credit management.
+                </p>
+</div>
+</section>
+<!-- Actionable Tips (Bento-style Grid) -->
+<section class="space-y-6">
+<div class="flex items-baseline justify-between">
+<h3 class="text-2xl font-headline font-bold text-primary-container">Actionable Tips</h3>
+<span class="text-secondary font-label text-xs font-bold uppercase tracking-wider">3 New Tips</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Tip 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl space-y-4 border-l-4 border-tertiary-fixed-dim">
+<div class="flex items-center gap-3">
+<div class="bg-tertiary-fixed text-on-tertiary-fixed p-2 rounded-xl">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_down</span>
+</div>
+<p class="font-headline font-bold text-sm">Keep it under 30%</p>
+</div>
+<p class="text-on-surface-variant text-sm">Aim to stay below 30% utilization on each individual card and across all accounts combined.</p>
+</div>
+<!-- Tip 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl space-y-4 border-l-4 border-secondary-container">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-fixed text-on-secondary-fixed p-2 rounded-xl">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_chart</span>
+</div>
+<p class="font-headline font-bold text-sm">Request an Increase</p>
+</div>
+<p class="text-on-surface-variant text-sm">Higher credit limits lower your utilization percentage instantly, provided your spending remains consistent.</p>
+</div>
+<!-- Tip 3: Wide Card -->
+<div class="md:col-span-2 bg-primary-container text-white p-6 rounded-xl flex items-center justify-between overflow-hidden relative">
+<div class="z-10 space-y-2 max-w-[60%]">
+<h4 class="font-headline font-bold text-lg">Pay Before Statement Date</h4>
+<p class="text-on-primary-container text-sm">Pay your balance before the statement closing date so a lower amount is reported to credit bureaus.</p>
+</div>
+<div class="bg-secondary-container p-4 rounded-full scale-125 z-10">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">event_upcoming</span>
+</div>
+<!-- Decorative Graphic -->
+<div class="absolute right-[-20px] top-[-20px] w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+</div>
+</div>
+</section>
+<!-- Insights Banner -->
+<div class="bg-surface-container rounded-xl p-6 flex items-center gap-4">
+<img class="w-16 h-16 rounded-xl object-cover" data-alt="close-up of digital credit score meter glowing on a dark screen with professional financial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvV0KRIJu2hiBgpxDlJfYQN_WqoimKZF2kWKU96aJzp4bXjiw-llbJ7IPxu3JHrYZg2O9wtODeBECz8QvrKAlzj5Ad7h52z3EOzMG1DnWa6Kr_Z6UBE3lsEv3gjDfizghnCAkKaPtch08G_PEEfMwjWcWKvRvUaWAPd_P2ZH2yyMuSff7cE_I1QFl1hurGXtARd2-LJX4vW2Ir0Oy_6EHYLKX3EYd1UbIov9ivkUaOdJl3JlhIjt8rgZtxoIzKbthWujUnzL2aY8o"/>
+<div>
+<p class="font-headline font-bold text-sm">Did you know?</p>
+<p class="text-on-surface-variant text-xs">Users who stay under 10% utilization often see the highest credit score gains.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+</body></html>

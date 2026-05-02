@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CredStellar - Payment Success</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c8c5d0",
+                        "surface-container-high": "#e7e8e9",
+                        "tertiary": "#000000",
+                        "on-tertiary-container": "#32963b",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#002204",
+                        "outline": "#78767f",
+                        "surface-dim": "#d9dadb",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-fixed-variant": "#43426f",
+                        "background": "#f8f9fa",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-bright": "#f8f9fa",
+                        "secondary-fixed": "#dce1ff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#c3c1f7",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#fffbff",
+                        "secondary-fixed-dim": "#b6c4ff",
+                        "on-secondary-fixed-variant": "#003ab2",
+                        "primary": "#000000",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#78dc77",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#c3c1f7",
+                        "on-tertiary-fixed-variant": "#005313",
+                        "surface-variant": "#e1e3e4",
+                        "tertiary-container": "#002204",
+                        "surface": "#f8f9fa",
+                        "on-secondary-fixed": "#001550",
+                        "primary-container": "#171641",
+                        "surface-tint": "#5a5a88",
+                        "on-surface": "#191c1d",
+                        "on-primary-fixed": "#171641",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#1a4fd6",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary-fixed": "#94f990",
+                        "on-surface-variant": "#47464e",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#807fb0",
+                        "on-background": "#191c1d",
+                        "secondary-container": "#3e6af0",
+                        "primary-fixed": "#e2dfff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopAppBar from JSON -->
+<header class="docked full-width top-0 bg-[#f8f9fa] dark:bg-[#080633] shadow-[0_8px_30px_rgb(0,0,0,0.04)] z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="person">person</span>
+</div>
+<span class="font-manrope font-extrabold text-[#080633] dark:text-white tracking-tighter text-2xl">CredStellar</span>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-[#e7e8e9] dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[#080633] dark:text-[#f3f4f5]" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 py-12 max-w-2xl mx-auto w-full">
+<!-- Success Animation/Icon Area -->
+<div class="mb-10 relative">
+<!-- Ambient shadow/glow behind the icon -->
+<div class="absolute inset-0 bg-tertiary-fixed opacity-20 blur-3xl rounded-full"></div>
+<div class="relative w-32 h-32 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-[0_24px_48px_rgba(0,0,0,0.04)]">
+<span class="material-symbols-outlined text-on-tertiary-container text-7xl" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<h1 class="font-headline text-4xl sm:text-5xl font-extrabold tracking-tight text-primary mb-2 text-center">Payment Successful</h1>
+<p class="font-body text-on-surface-variant mb-12 text-center">Your funds have been securely transferred to the ledger.</p>
+<!-- Nested Data Container -->
+<div class="w-full bg-surface-container-low p-6 sm:p-8 rounded-xl flex flex-col gap-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] mb-12">
+<!-- Amount Display -->
+<div class="flex flex-col items-center justify-center py-4">
+<span class="font-label text-surface-tint uppercase tracking-widest text-xs font-semibold mb-2">Total Amount Settled</span>
+<div class="font-headline text-5xl font-bold tracking-tighter text-primary">
+                    $4,250<span class="text-3xl text-outline-variant">.00</span>
+</div>
+<div class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-surface-container-lowest rounded-full shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body text-sm font-medium text-surface-tint">≈ 35,416.65 XLM</span>
+</div>
+</div>
+<!-- Receipt Details -->
+<div class="bg-surface-container-lowest rounded-lg p-5 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="font-label text-sm text-on-surface-variant">Recipient</span>
+<span class="font-body font-medium text-on-surface">Starlight Holdings LLC</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label text-sm text-on-surface-variant">Date &amp; Time</span>
+<span class="font-body font-medium text-on-surface">Oct 24, 2023 • 14:32 UTC</span>
+</div>
+<!-- Stellar Transaction Badge -->
+<div class="mt-4 pt-4 border-t border-outline-variant/15 flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="deployed_code">deployed_code</span>
+<span class="font-label text-xs uppercase tracking-wider font-semibold text-secondary">Powered by Stellar</span>
+</div>
+<span class="font-label text-xs bg-tertiary-container/10 text-on-tertiary-container px-2 py-0.5 rounded-full font-semibold">Verified</span>
+</div>
+<div class="flex justify-between items-center bg-background rounded p-3">
+<span class="font-label text-xs text-on-surface-variant">Network Hash</span>
+<a class="font-mono text-sm text-secondary hover:text-secondary-container transition-colors truncate max-w-[150px] sm:max-w-[200px]" href="#" title="0x4f9a2b8c...a3e">0x4f9a2b8c...a3e</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col gap-4">
+<!-- Primary Action -->
+<button class="w-full bg-gradient-to-r from-primary-container to-primary text-on-primary py-4 rounded-md font-body font-semibold text-lg flex items-center justify-center gap-2 hover:opacity-95 transition-opacity shadow-[0_4px_14px_rgba(0,0,0,0.1)]">
+                Done
+            </button>
+<!-- Secondary Action -->
+<button class="w-full py-4 rounded-md font-body font-medium text-secondary flex items-center justify-center gap-2 hover:bg-secondary-fixed/50 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="ios_share">ios_share</span>
+                Share Receipt
+            </button>
+</div>
+</main>
+</body></html>

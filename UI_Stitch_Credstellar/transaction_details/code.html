@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Transaction Details | CredStellar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#171641",
+                        "outline": "#78767f",
+                        "on-secondary-fixed": "#001550",
+                        "surface-tint": "#5a5a88",
+                        "secondary-fixed": "#dce1ff",
+                        "primary": "#000000",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#fffbff",
+                        "surface": "#f8f9fa",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#78dc77",
+                        "surface-container-high": "#e7e8e9",
+                        "secondary-container": "#3e6af0",
+                        "secondary": "#1a4fd6",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c8c5d0",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "background": "#f8f9fa",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#47464e",
+                        "primary-fixed": "#e2dfff",
+                        "on-tertiary-container": "#32963b",
+                        "inverse-primary": "#c3c1f7",
+                        "tertiary": "#000000",
+                        "surface-bright": "#f8f9fa",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-surface": "#191c1d",
+                        "on-background": "#191c1d",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-dim": "#d9dadb",
+                        "surface-container": "#edeeef",
+                        "surface-variant": "#e1e3e4",
+                        "on-tertiary-fixed": "#002204",
+                        "on-tertiary-fixed-variant": "#005313",
+                        "tertiary-fixed": "#94f990",
+                        "primary-container": "#171641",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#c3c1f7",
+                        "on-primary-container": "#807fb0",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#b6c4ff",
+                        "on-secondary-fixed-variant": "#003ab2",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-fixed-variant": "#43426f",
+                        "tertiary-container": "#002204"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<nav class="bg-[#f8f9fa] dark:bg-[#080633] shadow-[0px_8px_24px_rgba(25,28,29,0.04)] fixed top-0 w-full z-50 flex items-center justify-between px-6 py-4 h-16">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-150 p-2 rounded-full hover:bg-[#f3f4f5] dark:hover:bg-[#171641]">
+<span class="material-symbols-outlined text-[#191c1d] dark:text-[#f3f4f5]">arrow_back</span>
+</button>
+<h1 class="font-['Manrope'] font-bold tracking-tight text-xl text-[#191c1d] dark:text-[#f3f4f5]">Transaction Details</h1>
+</div>
+<button class="active:scale-95 transition-transform duration-150 p-2 rounded-full hover:bg-[#f3f4f5] dark:hover:bg-[#171641]">
+<span class="material-symbols-outlined text-[#191c1d] dark:text-[#f3f4f5]">more_vert</span>
+</button>
+</nav>
+<main class="mt-20 px-6 max-w-2xl mx-auto space-y-10">
+<!-- Header Section: Merchant & Amount -->
+<section class="flex flex-col items-center text-center space-y-6 py-8">
+<div class="relative">
+<div class="w-24 h-24 rounded-xl bg-surface-container-low flex items-center justify-center overflow-hidden shadow-sm">
+<img alt="Merchant Logo" class="w-full h-full object-cover" data-alt="minimalist modern coffee shop logo with star and cup symbol on clean white background flat professional design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxs0uerLOwtAgJWRYoXykrsmh5CXrCTmMOIw07lCPvSUDKrd-1tmItWDs_N0fPoXKYZ8zmvmT-C-ddhAtJAbpwMa9IbNfPjju24Z4WMJhSmKTkRCrFUYkPiqvT1t2jM4MBfsJVShcGSB3MQD3oBSVSsl1Q8T-SamCvUu7ZjUgu-MfHkJdZuOwA0LIMS7bqDvM5aeSaZdbrUtEggYzZIoR8iOxaAWzeouFfx6jPV6waHr51n4rjUWGYdQp2B5V9a5iarRJEefderfc"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-secondary text-on-secondary w-8 h-8 rounded-full flex items-center justify-center border-4 border-surface">
+<span class="material-symbols-outlined text-sm">restaurant</span>
+</div>
+</div>
+<div class="space-y-1">
+<h2 class="text-2xl font-extrabold tracking-tight text-primary">Starbucks Coffee</h2>
+<p class="text-on-surface-variant font-medium tracking-wide text-sm uppercase">Dining • Bandra West</p>
+</div>
+<div class="space-y-1">
+<div class="text-5xl font-extrabold tracking-tighter text-on-surface">
+                    ₹450.00
+                </div>
+<div class="text-lg font-semibold text-secondary-container tracking-tight">
+                    ≈ $5.42 USD
+                </div>
+</div>
+<span class="inline-flex items-center px-4 py-1.5 rounded-full bg-tertiary-container text-on-tertiary-container text-xs font-bold uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm mr-1.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                Cleared
+            </span>
+</section>
+<!-- Transaction Details Card -->
+<section class="bg-surface-container-lowest p-8 rounded-xl shadow-[0px_8px_32px_rgba(25,28,29,0.06)] space-y-8">
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant">General Information</h3>
+<div class="grid grid-cols-1 gap-y-6">
+<!-- Row 1 -->
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Date &amp; Time</p>
+<p class="text-on-surface font-semibold">Oct 24, 2023 • 08:30 AM</p>
+</div>
+<div class="text-right">
+<p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Payment Method</p>
+<div class="flex items-center gap-2 justify-end">
+<span class="material-symbols-outlined text-secondary text-lg">auto_awesome</span>
+<p class="text-on-surface font-semibold">Stellar Credit Line</p>
+</div>
+</div>
+</div>
+<!-- Row 2 (Full Width) -->
+<div class="bg-surface-container-low p-4 rounded-xl">
+<p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Transaction Hash</p>
+<div class="flex items-center justify-between gap-4">
+<p class="text-on-surface font-mono text-sm truncate">4c92...8f31b57e0c12a819</p>
+<button class="text-secondary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-xl">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">FX Rate</p>
+<p class="text-on-surface font-semibold">1 USD = ₹83.02</p>
+</div>
+<div class="text-right">
+<p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1">Network Fee</p>
+<p class="text-on-tertiary-container font-semibold">0.00001 XLM (Covered)</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Notes Section -->
+<section class="bg-surface-container-low p-6 rounded-xl space-y-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">notes</span>
+<h3 class="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">Associated Notes</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-lowest px-4 py-2 rounded-lg text-sm font-medium text-on-surface flex items-center gap-2">
+                    Business Lunch
+                    <span class="material-symbols-outlined text-sm text-outline cursor-pointer">close</span>
+</span>
+<button class="border border-dashed border-outline-variant px-4 py-2 rounded-lg text-sm font-medium text-outline flex items-center gap-2 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Add Tag
+                </button>
+</div>
+</section>
+<!-- Map Snippet (Editorial Style) -->
+<section class="h-40 rounded-xl overflow-hidden grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500 relative">
+<img alt="Transaction Location Map" class="w-full h-full object-cover" data-alt="stylized top-down urban map with clean architectural lines and professional soft grey and navy color palette" data-location="Mumbai, India" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_xXuwCT2UpH6NBijf69KSUG7Nk5Ojpivura6ViiYfbJCmstAurrgy5ip-cEDexs5VrwCEPyx9E7AbBLe_INJQo6dIXUF7H83Efzho1ulqzKf7jCyRIpIk5mWlZ2fSa0r0VUCW5kFNhCbbBuRk_-k-XvU451Kt2qhN1xFemam2zSirSkQ6azy6GHOhngyixcif2oB8XYZf4qA6hXVmSFgsYGrxS4ruK6wXwloJy9F6PX-HhnFLQcgOFabQq54RizoAWHr6rwrn3jk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="text-xs font-bold text-on-surface bg-surface-container-lowest/80 backdrop-blur-md px-2 py-1 rounded">Bandra West, Mumbai</span>
+</div>
+</section>
+<!-- Action Buttons -->
+<section class="flex flex-col gap-4 pt-4">
+<button class="w-full bg-primary-container text-on-primary py-4 rounded-xl font-bold tracking-tight shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-3 bg-gradient-to-r from-primary-container to-primary">
+<span class="material-symbols-outlined">ios_share</span>
+                Share Receipt
+            </button>
+<button class="w-full bg-transparent border border-outline-variant text-on-surface py-4 rounded-xl font-bold tracking-tight active:scale-[0.98] transition-all flex items-center justify-center gap-3 hover:bg-surface-container-high">
+<span class="material-symbols-outlined">download</span>
+                Download CSV
+            </button>
+</section>
+</main>
+<!-- Support Link -->
+<div class="text-center py-8">
+<button class="text-xs font-bold text-secondary uppercase tracking-widest hover:underline decoration-2 underline-offset-4">
+            Report an issue with this transaction
+        </button>
+</div>
+</body></html>

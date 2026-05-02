@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CredStellar - Transaction History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#c8c5d0",
+                      "surface-container-high": "#e7e8e9",
+                      "tertiary": "#000000",
+                      "on-tertiary-container": "#32963b",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed": "#002204",
+                      "outline": "#78767f",
+                      "surface-dim": "#d9dadb",
+                      "inverse-surface": "#2e3132",
+                      "on-primary-fixed-variant": "#43426f",
+                      "background": "#f8f9fa",
+                      "surface-container-highest": "#e1e3e4",
+                      "surface-bright": "#f8f9fa",
+                      "secondary-fixed": "#dce1ff",
+                      "inverse-on-surface": "#f0f1f2",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#c3c1f7",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#fffbff",
+                      "secondary-fixed-dim": "#b6c4ff",
+                      "on-secondary-fixed-variant": "#003ab2",
+                      "primary": "#000000",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed-dim": "#78dc77",
+                      "surface-container": "#edeeef",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#c3c1f7",
+                      "on-tertiary-fixed-variant": "#005313",
+                      "surface-variant": "#e1e3e4",
+                      "tertiary-container": "#002204",
+                      "surface": "#f8f9fa",
+                      "on-secondary-fixed": "#001550",
+                      "primary-container": "#171641",
+                      "surface-tint": "#5a5a88",
+                      "on-surface": "#191c1d",
+                      "on-primary-fixed": "#171641",
+                      "on-tertiary": "#ffffff",
+                      "secondary": "#1a4fd6",
+                      "surface-container-low": "#f3f4f5",
+                      "tertiary-fixed": "#94f990",
+                      "on-surface-variant": "#47464e",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#807fb0",
+                      "on-background": "#191c1d",
+                      "secondary-container": "#3e6af0",
+                      "primary-fixed": "#e2dfff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#f8f9fa] dark:bg-[#080633] text-[#080633] dark:text-[#f3f4f5] shadow-[0_8px_30px_rgb(0,0,0,0.04)] sticky top-0 z-40 w-full transition-colors">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-xl mx-auto">
+<!-- Leading Avatar -->
+<div class="flex items-center gap-3">
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a young professional woman with a soft smile, natural lighting, wearing a navy blazer, against a clean light grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6gmyQEWq7DG3nNRpU41bzgWxCAMKQACqEuwWHweYk-u2QXbfmsuvvpLzhrByXXO655BSVDmvSjFi7tl63ExDzKIfBLHbl5QJ-bwIXGpmcRpJ7Y9DJpHiApJuuKq1AYAc8iC4JzYUXGLGSr27XE85IExwlNGKFKbKJ5NnuXReWFMy5gpR0sUsvHYRRO8t1g46NWLOMVWvVrZYwrkHvo244IKsmlza0rAjSQdcVAa9dTDAOHeeLo9yqQVis0SNW80cYgzFP0YuZEyU"/>
+</div>
+<!-- Headline -->
+<div class="font-manrope font-extrabold text-[#080633] dark:text-white tracking-tighter text-2xl">
+                CredStellar
+            </div>
+<!-- Trailing Icon -->
+<button class="hover:bg-[#e7e8e9] dark:hover:bg-slate-800 transition-colors p-2 rounded-full active:scale-95 duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="max-w-screen-xl mx-auto px-4 sm:px-6 py-8">
+<!-- Header & Actions -->
+<section class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-10">
+<div>
+<h1 class="font-headline text-4xl font-extrabold tracking-tight text-primary mb-2">The Ledger</h1>
+<p class="font-body text-on-surface-variant text-sm">Your secure transaction history across all currencies.</p>
+</div>
+<!-- Search & Export -->
+<div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+<!-- Search Bar (Nesting Principle) -->
+<div class="bg-surface-container-low rounded-xl flex items-center px-4 py-3 flex-1 sm:w-80 transition-all focus-within:bg-surface-container-highest">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="search">search</span>
+<input class="bg-transparent border-none outline-none focus:ring-0 text-sm font-body text-on-surface placeholder-outline w-full p-0" placeholder="Search transactions..." type="text"/>
+</div>
+<!-- Export Button (Secondary Ghost) -->
+<button class="flex items-center justify-center gap-2 px-5 py-3 border border-outline-variant/15 rounded-md text-secondary font-body font-medium text-sm hover:bg-surface-container-low transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+                    Export CSV
+                </button>
+</div>
+</section>
+<!-- Filters -->
+<section class="mb-8 overflow-x-auto hide-scrollbar pb-2">
+<div class="flex gap-3 min-w-max">
+<button class="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-label text-sm font-semibold tracking-wide transition-colors">
+                    All
+                </button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high px-5 py-2 rounded-full font-label text-sm font-medium transition-colors">
+                    Global QR
+                </button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high px-5 py-2 rounded-full font-label text-sm font-medium transition-colors">
+                    FD Interest
+                </button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high px-5 py-2 rounded-full font-label text-sm font-medium transition-colors">
+                    Limits
+                </button>
+</div>
+</section>
+<!-- Transaction Ledger Structure (Tonal Layering) -->
+<div class="bg-surface-container-low rounded-[1.5rem] p-2 sm:p-4 md:p-6 space-y-8">
+<!-- Date Group: Today -->
+<section>
+<h2 class="font-label text-xs font-semibold uppercase tracking-widest text-outline mb-4 px-2">Today</h2>
+<div class="space-y-3">
+<!-- Transaction Item 1: Global QR -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex items-center justify-between group hover:bg-surface-bright transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-low rounded-xl flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-base text-primary">Blue Bottle Coffee</h3>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-body text-xs text-on-surface-variant">09:42 AM</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-body text-xs text-on-surface-variant">Global QR</span>
+</div>
+</div>
+</div>
+<div class="text-right flex flex-col items-end">
+<div class="font-headline font-extrabold text-lg text-primary tracking-tight">-$4.50</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body text-xs text-on-surface-variant font-medium">-37.5 XLM</span>
+<span class="bg-tertiary-container text-on-tertiary-container rounded-full text-[9px] font-bold uppercase tracking-wider px-2 py-0.5">Cleared</span>
+</div>
+</div>
+</div>
+<!-- Transaction Item 2: Limit Increase -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex items-center justify-between group hover:bg-surface-bright transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary-container text-on-primary-container rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-base text-primary">Credit Limit Upgrade</h3>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-body text-xs text-on-surface-variant">08:00 AM</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-body text-xs text-on-surface-variant">System</span>
+</div>
+</div>
+</div>
+<div class="text-right flex flex-col items-end">
+<div class="font-headline font-extrabold text-lg text-on-tertiary-container tracking-tight">+$5,000.00</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-tertiary-container text-on-tertiary-container rounded-full text-[9px] font-bold uppercase tracking-wider px-2 py-0.5">Approved</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Date Group: Yesterday -->
+<section>
+<h2 class="font-label text-xs font-semibold uppercase tracking-widest text-outline mb-4 px-2">Yesterday</h2>
+<div class="space-y-3">
+<!-- Transaction Item 3: FD Interest -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex items-center justify-between group hover:bg-surface-bright transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-low rounded-xl flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-base text-primary">Fixed Deposit Interest</h3>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-body text-xs text-on-surface-variant">End of Day</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-body text-xs text-on-surface-variant">Yield</span>
+</div>
+</div>
+</div>
+<div class="text-right flex flex-col items-end">
+<div class="font-headline font-extrabold text-lg text-on-tertiary-container tracking-tight">+$12.50</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body text-xs text-on-surface-variant font-medium">+104.1 XLM</span>
+<span class="bg-tertiary-container text-on-tertiary-container rounded-full text-[9px] font-bold uppercase tracking-wider px-2 py-0.5">Cleared</span>
+</div>
+</div>
+</div>
+<!-- Transaction Item 4: Merchant Purchase -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex items-center justify-between group hover:bg-surface-bright transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-low rounded-xl flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-base text-primary">Whole Foods Market</h3>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-body text-xs text-on-surface-variant">06:15 PM</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-body text-xs text-on-surface-variant">Card Ending 4092</span>
+</div>
+</div>
+</div>
+<div class="text-right flex flex-col items-end">
+<div class="font-headline font-extrabold text-lg text-primary tracking-tight">-$142.80</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body text-xs text-on-surface-variant font-medium">-1,190.0 XLM</span>
+<span class="bg-secondary-container text-on-secondary-container rounded-full text-[9px] font-bold uppercase tracking-wider px-2 py-0.5">Pending</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-white/80 dark:bg-[#080633]/80 backdrop-blur-xl border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.08)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 md:hidden rounded-t-3xl transition-colors">
+<!-- Dashboard (Inactive) -->
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-[#1a4fd6] dark:hover:text-blue-300 transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="dashboard">dashboard</span>
+<span class="font-inter text-[11px] font-semibold uppercase tracking-wider">Dashboard</span>
+</button>
+<!-- Credit (Inactive) -->
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-[#1a4fd6] dark:hover:text-blue-300 transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-inter text-[11px] font-semibold uppercase tracking-wider">Credit</span>
+</button>
+<!-- Scan (Inactive) -->
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-[#1a4fd6] dark:hover:text-blue-300 transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-inter text-[11px] font-semibold uppercase tracking-wider">Scan</span>
+</button>
+<!-- History (Active) -->
+<button class="flex flex-col items-center justify-center bg-[#f3f4f5] dark:bg-[#171641] text-[#080633] dark:text-white rounded-2xl px-5 py-2 hover:text-[#1a4fd6] dark:hover:text-blue-300 transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="receipt_long" data-weight="fill" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-inter text-[11px] font-semibold uppercase tracking-wider text-[#1a4fd6] dark:text-blue-400">History</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,31 @@
+# ── OS & IDE ──
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+*.iml
+
+# ── Backend ──
+credstellar_backend/node_modules/
+credstellar_backend/.env
+
+# ── Flutter ──
+credstellar_app/.dart_tool/
+credstellar_app/.packages
+credstellar_app/build/
+credstellar_app/.flutter-plugins
+credstellar_app/.flutter-plugins-dependencies
+credstellar_app/android/.gradle/
+credstellar_app/android/app/debug/
+credstellar_app/android/app/profile/
+credstellar_app/android/app/release/
+credstellar_app/ios/Pods/
+credstellar_app/ios/.symlinks/
+credstellar_app/pubspec.lock
+credstellar_app/android/local.properties
+credstellar_app/android/key.properties
+
+# ── Docs (optional, keep if you want) ──
+# CredStellar_Pitch_Document-1.docx
+deploy.sh

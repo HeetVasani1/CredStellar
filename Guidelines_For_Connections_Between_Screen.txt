@@ -1,0 +1,59 @@
+Build this multi-screen app with the following navigation flow.
+Prototype Navigation Spec
+Screens
+Dashboard v3 - Enhanced — Initial Screen
+FD Management Details
+Payment Success
+History
+Credit Utilization Guide
+QR Scanner
+Add Fixed Deposit
+Payment Preview
+Transaction Details
+Credit Management
+Navigation Flow
+Credit Management:
+Element (xpath: //nav//span[contains(text(), 'Dashboard')]/..) → Dashboard v3 - Enhanced (none transition)
+Element (xpath: //nav//span[contains(text(), 'Scan')]/..) → QR Scanner (slide_up transition)
+Element (xpath: //nav//span[contains(text(), 'History')]/..) → History (none transition)
+Element (xpath: //button[contains(., 'Add New FD')]) → Add Fixed Deposit (slide_up transition)
+Element (xpath: //span[contains(text(), 'View All')]) → FD Management Details (push transition)
+Dashboard v3 - Enhanced:
+Element (xpath: //span[text()='Utilization Health']/ancestor::div[contains(@class, 'bg-surface-container-lowest')]) → Credit Utilization Guide (push transition)
+Element (xpath: //h3[text()='Scan to Pay']/ancestor::div[contains(@class, 'cursor-pointer')]) → QR Scanner (push transition)
+Element (xpath: //button[contains(., 'View Ledger')]) → History (push transition)
+Element (xpath: //nav//button[contains(., 'Credit')] | //nav//button[span[text()='account_balance_wallet']]) → Credit Management (none transition)
+Element (xpath: //nav//button[contains(., 'Scan')] | //nav//button[span[text()='qr_code_scanner']]) → QR Scanner (slide_up transition)
+Element (xpath: //nav//button[contains(., 'History')] | //nav//button[span[text()='receipt_long']]) → History (none transition)
+Add Fixed Deposit:
+Element (xpath: //header//span[text()='arrow_back']) → Credit Management (push_back transition)
+Element (xpath: //button[contains(., 'Confirm Deposit')]) → Credit Management (push_back transition)
+Element (xpath: //nav//button[contains(., 'Dashboard')]) → Dashboard v3 - Enhanced (none transition)
+Element (xpath: //nav//button[contains(., 'Scan')]) → QR Scanner (slide_up transition)
+Element (xpath: //nav//button[contains(., 'History')]) → History (none transition)
+History:
+Element (xpath: //nav//button[contains(., 'Dashboard')] | //nav//button[span[text()='dashboard']]) → Dashboard v3 - Enhanced (none transition)
+Element (xpath: //nav//button[contains(., 'Credit')] | //nav//button[span[text()='account_balance_wallet']]) → Credit Management (none transition)
+Element (xpath: //nav//button[contains(., 'Scan')] | //nav//button[span[text()='qr_code_scanner']]) → QR Scanner (slide_up transition)
+Element (xpath: //div[contains(., 'Blue Bottle Coffee')]/ancestor::div[contains(@class, 'cursor-pointer')]) → Transaction Details (push transition)
+Element (xpath: //div[contains(., 'Whole Foods Market')]/ancestor::div[contains(@class, 'cursor-pointer')]) → Transaction Details (push transition)
+FD Management Details:
+Element (xpath: //header//button[contains(., 'arrow_back')]) → Credit Management (push_back transition)
+Element (xpath: //nav//span[text()='Dashboard']/ancestor::a) → Dashboard v3 - Enhanced (none transition)
+Element (xpath: //nav//span[text()='Scan']/ancestor::a) → QR Scanner (slide_up transition)
+Element (xpath: //nav//span[text()='History']/ancestor::a) → History (none transition)
+Element (xpath: //button[span[text()='add']]) → Add Fixed Deposit (slide_up transition)
+Transaction Details:
+Element (xpath: //nav//button[span[text()='arrow_back']]) → History (push_back transition)
+Payment Success:
+Element (xpath: //button[contains(., 'Done')]) → Dashboard v3 - Enhanced (push_back transition)
+Payment Preview:
+Element (xpath: //button[contains(., 'Pay with Credit')]) → Payment Success (push transition)
+Credit Utilization Guide:
+Element (xpath: //header//button[span[text()='arrow_back']]) → Dashboard v3 - Enhanced (push_back transition)
+QR Scanner:
+Element (xpath: //button[@aria-label='Close Scanner']) → Dashboard v3 - Enhanced (push_back transition)
+Element (xpath: //div[contains(@class, 'bg-surface-container-lowest/95')]/p[contains(text(), 'Scan any UPI')]) → Payment Preview (push transition)
+Element (xpath: //nav//button[contains(., 'Dashboard')] | //nav//button[span[text()='dashboard']]) → Dashboard v3 - Enhanced (none transition)
+Element (xpath: //nav//button[contains(., 'Credit')] | //nav//button[span[text()='account_balance_wallet']]) → Credit Management (none transition)
+Element (xpath: //nav//button[contains(., 'History')] | //nav//button[span[text()='receipt_long']]) → History (none transition)

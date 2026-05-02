@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CredStellar Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#c8c5d0",
+                      "surface-container-high": "#e7e8e9",
+                      "tertiary": "#000000",
+                      "on-tertiary-container": "#32963b",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed": "#002204",
+                      "outline": "#78767f",
+                      "surface-dim": "#d9dadb",
+                      "inverse-surface": "#2e3132",
+                      "on-primary-fixed-variant": "#43426f",
+                      "background": "#f8f9fa",
+                      "surface-container-highest": "#e1e3e4",
+                      "surface-bright": "#f8f9fa",
+                      "secondary-fixed": "#dce1ff",
+                      "inverse-on-surface": "#f0f1f2",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#c3c1f7",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#fffbff",
+                      "secondary-fixed-dim": "#b6c4ff",
+                      "on-secondary-fixed-variant": "#003ab2",
+                      "primary": "#000000",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed-dim": "#78dc77",
+                      "surface-container": "#edeeef",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#c3c1f7",
+                      "on-tertiary-fixed-variant": "#005313",
+                      "surface-variant": "#e1e3e4",
+                      "tertiary-container": "#002204",
+                      "surface": "#f8f9fa",
+                      "on-secondary-fixed": "#001550",
+                      "primary-container": "#171641",
+                      "surface-tint": "#5a5a88",
+                      "on-surface": "#191c1d",
+                      "on-primary-fixed": "#171641",
+                      "on-tertiary": "#ffffff",
+                      "secondary": "#1a4fd6",
+                      "surface-container-low": "#f3f4f5",
+                      "tertiary-fixed": "#94f990",
+                      "on-surface-variant": "#47464e",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#807fb0",
+                      "on-background": "#191c1d",
+                      "secondary-container": "#3e6af0",
+                      "primary-fixed": "#e2dfff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": [
+                              "Manrope", "sans-serif"
+                      ],
+                      "body": [
+                              "Inter", "sans-serif"
+                      ],
+                      "label": [
+                              "Inter", "sans-serif"
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        * {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased pb-28 pt-28">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 bg-[#f8f9fa] dark:bg-[#080633] flex justify-between items-center w-full px-6 py-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] z-40">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden shadow-sm">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a smiling professional woman in soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsRX4HaH-gr3oTDDv_r_FxFclZnFVQBsqEJjy-0LKtCa2D99QFUDGNUm1iiawlqRDTfTCXqTb6JiPgFX2ejDDLOzDAm_q14seKc3jIRBKM207Uhh1Upqc3W4vgBjx3tX_jjIaSn1wzSlpPJbKJVFmxMPZEk5OofG07V6ntHqeqKwzx_mppG1adxKgNaj8Hk3W0HTAyJZaBx4QTJO17dwIvNR8T_JPdUXjiANJRfiV7QO1vN1dpsth_4ti8iimp30-mjfhNh1TUcq4"/>
+</div>
+</div><span class="font-manrope font-extrabold text-[#080633] dark:text-white tracking-tighter text-2xl absolute left-1/2 -translate-x-1/2">CredStellar</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e7e8e9] dark:hover:bg-slate-800 transition-colors text-[#080633] dark:text-[#f3f4f5] Active: scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="max-w-screen-md mx-auto px-6 flex flex-col gap-8">
+<!-- Hero: Credit Limit -->
+<section class="flex flex-col gap-6">
+<div class="flex flex-col gap-1">
+<h2 class="font-label text-sm text-on-surface-variant uppercase tracking-widest font-semibold">Total Credit Limit</h2>
+<div class="font-headline text-[4rem] tracking-tighter text-on-surface leading-none font-extrabold">$1,000<span class="text-3xl text-on-surface-variant font-medium tracking-tight">.00</span></div>
+</div>
+<!-- Custom Progress Component -->
+<div class="flex flex-col gap-3 bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_24px_rgb(0,0,0,0.02)]">
+<div class="flex justify-between items-end mb-1">
+<div class="flex flex-col">
+<span class="font-headline text-lg font-bold text-secondary">$350.00</span>
+<span class="font-label text-[10px] uppercase text-on-surface-variant tracking-wider font-semibold">Used Balance</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline text-lg font-bold text-on-surface">$650.00</span>
+<span class="font-label text-[10px] uppercase text-on-surface-variant tracking-wider font-semibold">Available</span>
+</div>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[35%] bg-gradient-to-r from-secondary to-secondary-fixed-dim rounded-full shadow-[0_0_8px_rgba(26,79,214,0.4)]"></div>
+</div>
+</div>
+</section>
+<!-- Credit Health & Rewards Row -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Credit Health Score -->
+<div class="col-span-2 md:col-span-1 bg-surface-container-lowest rounded-xl p-5 shadow-[0_2px_20px_rgb(0,0,0,0.02)] flex flex-col gap-4">
+<div class="flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">health_and_safety</span>
+<span class="font-label text-xs uppercase tracking-wider font-semibold">Utilization Health</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Circular Gauge Simulation -->
+<div class="relative w-16 h-16 rounded-full flex items-center justify-center bg-tertiary-fixed/20 shadow-[inset_0_0_10px_rgba(120,220,119,0.2)]">
+<svg class="absolute inset-0 w-full h-full -rotate-90 transform" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-tertiary-fixed-dim" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="65, 100" stroke-width="3"></path>
+</svg>
+<span class="font-headline text-lg font-extrabold text-on-surface">Good</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body text-sm font-semibold text-on-surface">35% Utilized</span>
+<span class="font-label text-[11px] text-on-surface-variant mt-0.5">Keep under 30% for Excellent</span>
+</div>
+</div>
+</div>
+<!-- Rewards & Incentives -->
+<div class="col-span-2 md:col-span-1 bg-surface-container-lowest rounded-xl p-5 shadow-[0_2px_20px_rgb(0,0,0,0.02)] flex flex-col gap-4">
+<div class="flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">stars</span>
+<span class="font-label text-xs uppercase tracking-wider font-semibold">Stellar Points</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_forward_ios</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="font-headline text-2xl font-extrabold text-on-surface tracking-tight">4,250 <span class="text-sm font-medium text-on-surface-variant">XLM</span></div>
+<div class="flex flex-col gap-1 mt-1">
+<div class="flex justify-between items-center">
+<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-wider font-semibold">Referral Milestone</span>
+<span class="font-label text-[10px] font-bold text-secondary">2/5 Friends</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[40%] bg-secondary rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Actions & Summaries -->
+<section class="grid grid-cols-2 gap-4">
+<!-- FD Deposit Summary -->
+<div class="col-span-2 md:col-span-1 bg-surface-container-low rounded-xl p-1.5 shadow-sm">
+<div class="bg-surface-container-lowest rounded-[0.6rem] p-5 h-full flex flex-col justify-between gap-6">
+<div class="flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+<span class="font-label text-xs uppercase tracking-wider font-semibold">FD Deposits</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-surface-tint">info</span>
+</div>
+<div>
+<div class="font-headline text-2xl font-extrabold text-on-surface tracking-tight">$1,200.00</div>
+<div class="font-label text-xs text-on-tertiary-container mt-1.5 flex items-center gap-1.5 font-medium bg-tertiary-fixed w-fit px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                            +5.2% APY
+                        </div>
+</div>
+</div>
+</div>
+<!-- Scan to Pay Primary Action -->
+<div class="col-span-2 md:col-span-1 bg-gradient-to-br from-primary-container to-primary rounded-xl p-6 flex flex-col justify-between items-start group cursor-pointer relative overflow-hidden shadow-[0_8px_32px_rgba(23,22,65,0.15)] hover:scale-[0.98] transition-transform duration-300">
+<div class="absolute inset-0 bg-surface-tint opacity-10 backdrop-blur-3xl mix-blend-overlay"></div>
+<div class="relative z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-on-primary mb-6 border border-white/5">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+</div>
+<div class="relative z-10 w-full flex justify-between items-end">
+<div>
+<h3 class="font-headline text-xl font-bold text-on-primary tracking-tight">Scan to Pay</h3>
+<p class="font-label text-[11px] text-on-primary-container mt-1 font-medium">Instant merchant settlement</p>
+</div>
+<span class="material-symbols-outlined text-on-primary-container group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</section>
+<!-- Recent Activity Ledger -->
+<section class="flex flex-col gap-6 bg-surface-container-lowest rounded-xl p-6 shadow-[0_2px_20px_rgb(0,0,0,0.02)]">
+<div class="flex justify-between items-center mb-2">
+<h3 class="font-headline text-lg font-extrabold text-on-surface tracking-tight">Recent Activity</h3>
+<button class="font-label text-xs font-semibold text-secondary flex items-center gap-1 hover:text-secondary-fixed-dim transition-colors">
+                    View Ledger 
+                    <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+<div class="flex flex-col gap-5">
+<!-- Transaction 1 -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface group-hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">local_cafe</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body text-sm font-semibold text-on-surface">Stellar Coffee Co.</span>
+<span class="font-label text-[11px] text-on-surface-variant mt-0.5">Today, 08:24 AM</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1.5">
+<span class="font-headline text-base font-bold text-on-surface tracking-tight">-$4.50</span>
+<span class="bg-tertiary-container text-on-tertiary-container rounded-full px-2.5 py-0.5 font-label text-[9px] font-bold uppercase tracking-widest">Cleared</span>
+</div>
+</div>
+<!-- Transaction 2 -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface group-hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body text-sm font-semibold text-on-surface">Whole Foods Market</span>
+<span class="font-label text-[11px] text-on-surface-variant mt-0.5">Yesterday, 14:30 PM</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1.5">
+<span class="font-headline text-base font-bold text-on-surface tracking-tight">-$124.30</span>
+<span class="bg-tertiary-container text-on-tertiary-container rounded-full px-2.5 py-0.5 font-label text-[9px] font-bold uppercase tracking-widest">Cleared</span>
+</div>
+</div>
+<!-- Transaction 3 -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface group-hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body text-sm font-semibold text-on-surface">Credit Limit Increase</span>
+<span class="font-label text-[11px] text-on-surface-variant mt-0.5">Oct 12, 09:00 AM</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1.5">
+<span class="font-headline text-base font-bold text-secondary tracking-tight">+$200.00</span>
+<span class="bg-surface-container-high text-on-surface-variant rounded-full px-2.5 py-0.5 font-label text-[9px] font-bold uppercase tracking-widest">System</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-[#080633]/80 backdrop-blur-xl rounded-t-3xl border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.08)]">
+<!-- Dashboard (Active) -->
+<button class="flex flex-col items-center justify-center bg-[#f3f4f5] dark:bg-[#171641] text-[#080633] dark:text-white rounded-2xl px-5 py-2 font-inter text-[11px] font-semibold uppercase tracking-wider Active: scale-95 duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            Dashboard
+        </button>
+<!-- Credit (Inactive) -->
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-[#1a4fd6] dark:hover:text-blue-300 transition-all font-inter text-[11px] font-semibold uppercase tracking-wider press-down-bounce-effect">
+<span class="material-symbols-outlined mb-1">account_balance_wallet</span>
+            Credit
+        </button>
+<!-- Scan (Inactive) -->
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-[#1a4fd6] dark:hover:text-blue-300 transition-all font-inter text-[11px] font-semibold uppercase tracking-wider press-down-bounce-effect">
+<span class="material-symbols-outlined mb-1">qr_code_scanner</span>
+            Scan
+        </button>
+<!-- History (Inactive) -->
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-[#1a4fd6] dark:hover:text-blue-300 transition-all font-inter text-[11px] font-semibold uppercase tracking-wider press-down-bounce-effect">
+<span class="material-symbols-outlined mb-1">receipt_long</span>
+            History
+        </button>
+</nav>
+</body></html>
