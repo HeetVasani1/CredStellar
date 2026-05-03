@@ -3,6 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../config/theme.dart';
 import '../../providers/credit_provider.dart';
+import '../../providers/fd_provider.dart';
+import '../add_fixed_deposit/add_fixed_deposit_screen.dart';
+import '../history/history_screen.dart';
+import '../qr_scanner/qr_scanner_screen.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
@@ -15,17 +19,105 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    // Fetch credit summary on dashboard load
-    Future.microtask(() => ref.read(creditProvider.notifier).fetchSummary());
+    Future.microtask(() {
+      ref.read(creditProvider.notifier).fetchSummary();
+      ref.read(fdListProvider.notifier).fetchFds();
+    });
   }
 
   String _formatCurrency(double value) {
     return NumberFormat('#,##0.00', 'en_US').format(value);
   }
 
+  void _showFdDetails(Map<String, dynamic> fd) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        final principal = (fd['principal_amount'] as num).toDouble();
+        final interest = (fd['estimated_interest'] as num).toDouble();
+        
+        // Simulating earned interest based on start date (for MVP, showing proportion of estimated)
+        final startDate = DateTime.parse(fd['created_at'].toString());
+        final maturityDate = DateTime.parse(fd['maturity_date'].toString());
+        final now = DateTime.now();
+        final totalDays = maturityDate.difference(startDate).inDays;
+        final elapsedDays = now.difference(startDate).inDays;
+        final progress = totalDays > 0 ? (elapsedDays / totalDays).clamp(0.0, 1.0) : 0.0;
+        final earnedInterest = interest * progress;
+
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          padding: const EdgeInsets.all(24),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: AppTheme.dividerColor,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Text(fd['name'] ?? 'Fixed Deposit', style: AppTheme.headlineSm),
+                const SizedBox(height: 8),
+                Text('Account ending in ${fd['account_number'] ?? '****'}', style: AppTheme.caption),
+                const SizedBox(height: 24),
+                _detailRow('Principal Amount', '\$${_formatCurrency(principal)}'),
+                _detailRow('APY Rate', '${fd['apy_rate']}%'),
+                _detailRow('Tenor', '${fd['tenor_months']} Months'),
+                _detailRow('Maturity Date', DateFormat('MMM dd, yyyy').format(maturityDate)),
+                const Divider(height: 32),
+                _detailRow('Total Estimated Interest', '+\$${_formatCurrency(interest)}', isPositive: true),
+                _detailRow('Interest Earned So Far', '+\$${_formatCurrency(earnedInterest)}', isPositive: true),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Close'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _detailRow(String label, String value, {bool isPositive = false}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label, style: AppTheme.bodySm),
+          Text(
+            value,
+            style: AppTheme.titleSm.copyWith(
+              color: isPositive ? AppTheme.healthGood : AppTheme.textPrimary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final credit = ref.watch(creditProvider);
+    final fdListState = ref.watch(fdListProvider);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -54,7 +146,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   Text(credit.error!, style: AppTheme.bodySm.copyWith(color: AppTheme.healthHigh)),
                   const SizedBox(height: 8),
                   TextButton(
-                    onPressed: () => ref.read(creditProvider.notifier).fetchSummary(),
+                    onPressed: () {
+                      ref.read(creditProvider.notifier).fetchSummary();
+                      ref.read(fdListProvider.notifier).fetchFds();
+                    },
                     child: const Text('Retry'),
                   ),
                 ],
@@ -96,12 +191,20 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           _buildStellarPointsCard(),
           const SizedBox(height: 16),
 
-          // ── FD Deposits (static for MVP) ──
-          _buildFdDepositsCard(),
+          // ── FD Deposits ──
+          _buildFdDepositsCard(fdListState),
           const SizedBox(height: 16),
 
           // ── Scan to Pay ──
-          _buildScanToPayCard(),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const QrScannerScreen()),
+              );
+            },
+            child: _buildScanToPayCard(),
+          ),
           const SizedBox(height: 24),
 
           // ── Recent Activity ──
@@ -276,7 +379,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  Widget _buildFdDepositsCard() {
+  Widget _buildFdDepositsCard(FdListState fdListState) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -294,13 +397,66 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               const SizedBox(width: 8),
               Text('FD DEPOSITS', style: AppTheme.labelUppercase),
               const Spacer(),
-              Icon(Icons.info_outline, color: AppTheme.primaryBlue, size: 18),
+              GestureDetector(
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const AddFixedDepositScreen()),
+                  );
+                  ref.read(creditProvider.notifier).fetchSummary();
+                  ref.read(fdListProvider.notifier).fetchFds();
+                },
+                child: Icon(Icons.add_circle, color: AppTheme.primaryBlue, size: 22),
+              ),
             ],
           ),
-          const SizedBox(height: 12),
-          Text('\$0.00', style: AppTheme.headlineMd),
-          const SizedBox(height: 4),
-          Text('No active deposits yet', style: AppTheme.caption),
+          const SizedBox(height: 16),
+          if (fdListState.isLoading)
+            const Center(child: CircularProgressIndicator())
+          else if (fdListState.fds.isEmpty)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('\$0.00', style: AppTheme.headlineMd),
+                const SizedBox(height: 4),
+                Text('No active deposits yet', style: AppTheme.caption),
+              ],
+            )
+          else
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: fdListState.fds.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 12),
+              itemBuilder: (context, index) {
+                final fd = fdListState.fds[index];
+                final principal = (fd['principal_amount'] as num).toDouble();
+                final apy = (fd['apy_rate'] as num).toDouble();
+                return GestureDetector(
+                  onTap: () => _showFdDetails(fd),
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppTheme.surface,
+                      borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(fd['name'] ?? 'Fixed Deposit', style: AppTheme.titleSm),
+                            Text('${fd['tenor_months']} Months @ $apy%', style: AppTheme.caption),
+                          ],
+                        ),
+                        Text('\$${_formatCurrency(principal)}', style: AppTheme.titleSm),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
         ],
       ),
     );
@@ -351,10 +507,18 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Recent Activity', style: AppTheme.headlineSm),
-            Text('View Ledger  >',
-                style: AppTheme.bodySm.copyWith(
-                    color: AppTheme.primaryBlue,
-                    fontWeight: FontWeight.w600)),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const HistoryScreen()),
+                );
+              },
+              child: Text('View Ledger  >',
+                  style: AppTheme.bodySm.copyWith(
+                      color: AppTheme.primaryBlue,
+                      fontWeight: FontWeight.w600)),
+            ),
           ],
         ),
         const SizedBox(height: 16),
@@ -371,9 +535,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               Icon(Icons.receipt_long,
                   color: AppTheme.textTertiary, size: 32),
               const SizedBox(height: 8),
-              Text('No transactions yet', style: AppTheme.bodySm),
-              Text('Make your first payment to see activity here.',
-                  style: AppTheme.caption),
+              Text('See ledger for all activity', style: AppTheme.bodySm),
             ],
           ),
         ),
@@ -381,3 +543,4 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 }
+

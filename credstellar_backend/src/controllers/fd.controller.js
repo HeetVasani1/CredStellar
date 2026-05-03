@@ -20,9 +20,11 @@ const create = asyncHandler(async (req, res) => {
   });
 });
 
-// GET /api/fd/list — placeholder
+// GET /api/fd/list
 const getList = asyncHandler(async (req, res) => {
-  res.status(501).json({ success: false, error: 'Not implemented yet' });
+  const userId = req.user.id;
+  const fds = await fdService.getList(userId);
+  res.status(200).json({ success: true, data: { fixed_deposits: fds } });
 });
 
 // GET /api/fd/:id — placeholder

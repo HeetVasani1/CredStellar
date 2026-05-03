@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 /// 3. Build the APK: flutter build apk --release
 class AppConfig {
   // ── Toggle this to switch between local dev and production ──
-  static const bool useProduction = false;
+  static const bool useProduction = true;
 
   // ── Your deployed backend URL (Render/Railway/etc.) ──
   // Replace this with your actual deployed URL

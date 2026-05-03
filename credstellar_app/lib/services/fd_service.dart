@@ -35,7 +35,8 @@ class FdService {
       final response = await _client.dio.get('/fd/list');
       final data = response.data;
       if (data['success'] == true) {
-        return List<Map<String, dynamic>>.from(data['data'] ?? []);
+        final fds = data['data']['fixed_deposits'] as List?;
+        return List<Map<String, dynamic>>.from(fds ?? []);
       }
       throw Exception(data['error'] ?? 'Failed to fetch FDs.');
     } on DioException catch (e) {

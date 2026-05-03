@@ -109,12 +109,15 @@ async function createFd(userId, { amount, tenor_months }) {
     throw new AppError(`Failed to update credit limit: ${creditUpdateError.message}`, 500);
   }
 
+  const fakeHash = '0x' + [...Array(64)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+
   // 4. Record FD creation as a transaction
   await supabase.from('transactions').insert({
     user_id: userId,
     type: 'fd_creation',
     merchant_name: fd.name,
     amount_usd: amount,
+    stellar_tx_hash: fakeHash,
     status: 'cleared',
     notes: `${tenor_months}-month FD at ${apyRate}% APY`,
   });
@@ -141,4 +144,22 @@ async function createFd(userId, { amount, tenor_months }) {
   };
 }
 
-module.exports = { createFd };
+/**
+ * Fetches all fixed deposits for a user
+ * @param {string} userId
+ */
+async function getList(userId) {
+  const { data: fds, error } = await supabase
+    .from('fixed_deposits')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    throw new AppError(`Failed to fetch FDs: ${error.message}`, 500);
+  }
+
+  return fds;
+}
+
+module.exports = { createFd, getList };

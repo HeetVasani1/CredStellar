@@ -38,6 +38,30 @@ class FdCreateState {
   }
 }
 
+/// FD list state
+class FdListState {
+  final bool isLoading;
+  final String? error;
+  final List<Map<String, dynamic>> fds;
+
+  const FdListState({
+    this.isLoading = false,
+    this.error,
+    this.fds = const [],
+  });
+
+  FdListState copyWith({
+    bool? isLoading,
+    String? error,
+    List<Map<String, dynamic>>? fds,
+  }) {
+    return FdListState(
+      isLoading: isLoading ?? this.isLoading,
+      error: error,
+      fds: fds ?? this.fds,
+    );
+  }
+}
 /// FD notifier — handles FD creation and refreshes credit afterward.
 class FdNotifier extends StateNotifier<FdCreateState> {
   final FdService _fdService;
@@ -85,6 +109,25 @@ class FdNotifier extends StateNotifier<FdCreateState> {
   static double getApy(int tenorMonths) => apyRates[tenorMonths] ?? 0;
 }
 
+class FdListNotifier extends StateNotifier<FdListState> {
+  final FdService _fdService;
+
+  FdListNotifier(this._fdService) : super(const FdListState());
+
+  Future<void> fetchFds() async {
+    state = state.copyWith(isLoading: true, error: null);
+    try {
+      final fds = await _fdService.listFds();
+      state = state.copyWith(isLoading: false, fds: fds);
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: e.toString().replaceFirst('Exception: ', ''),
+      );
+    }
+  }
+}
+
 // ── Providers ──
 
 final fdServiceProvider = Provider<FdService>((ref) => FdService());
@@ -95,4 +138,8 @@ final fdProvider =
     ref.read(fdServiceProvider),
     ref.read(creditProvider.notifier),
   );
+});
+
+final fdListProvider = StateNotifierProvider<FdListNotifier, FdListState>((ref) {
+  return FdListNotifier(ref.read(fdServiceProvider));
 });
