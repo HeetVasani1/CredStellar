@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../config/theme.dart';
 import '../payment_preview/payment_preview_screen.dart';
 
@@ -66,9 +67,24 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
     }
   }
 
-  /// Demo: simulate scanning a QR (since camera doesn't work on web/emulator without setup)
-  void _simulateScan() {
-    _onQrScanned('credstellar://pay?merchant_name=Blue Bottle Coffee&merchant_id=m_001');
+  void _toggleTorch() {
+    _scannerController.toggleTorch();
+  }
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final xFile = await picker.pickImage(source: ImageSource.gallery);
+    if (xFile != null) {
+      final success = await _scannerController.analyzeImage(xFile.path);
+      if (!success) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('No valid QR code found in the image.')),
+          );
+        }
+      }
+      // If success == true, the onDetect callback will be triggered automatically by MobileScanner.
+    }
   }
 
   @override
@@ -131,34 +147,15 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
                 ),
               ),
 
-              // Demo scan button (for testing without camera)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: ElevatedButton.icon(
-                  onPressed: _simulateScan,
-                  icon: const Icon(Icons.qr_code, size: 18),
-                  label: const Text('Simulate QR Scan'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.primaryBlue,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppTheme.radiusFull)),
-                  ),
-                ),
-              ),
-
               // Control buttons
               Padding(
                 padding: const EdgeInsets.only(bottom: 24),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _controlButton(Icons.flashlight_on_outlined),
+                    _controlButton(Icons.flashlight_on_outlined, _toggleTorch),
                     const SizedBox(width: 24),
-                    _controlButton(Icons.photo_library_outlined),
+                    _controlButton(Icons.photo_library_outlined, _pickImage),
                   ],
                 ),
               ),
@@ -169,15 +166,18 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
     );
   }
 
-  Widget _controlButton(IconData icon) {
-    return Container(
-      width: 56,
-      height: 56,
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(AppTheme.radiusLg),
+  Widget _controlButton(IconData icon, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 56,
+        height: 56,
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(AppTheme.radiusLg),
+        ),
+        child: Icon(icon, color: Colors.white, size: 24),
       ),
-      child: Icon(icon, color: Colors.white, size: 24),
     );
   }
 }

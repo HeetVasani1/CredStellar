@@ -5,11 +5,11 @@ import '../../config/theme.dart';
 import '../../providers/credit_provider.dart';
 import '../../providers/fd_provider.dart';
 import '../add_fixed_deposit/add_fixed_deposit_screen.dart';
-import '../history/history_screen.dart';
-import '../qr_scanner/qr_scanner_screen.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
-  const DashboardScreen({super.key});
+  final ValueChanged<int>? onSwitchTab;
+
+  const DashboardScreen({super.key, this.onSwitchTab});
 
   @override
   ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
@@ -27,6 +27,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   String _formatCurrency(double value) {
     return NumberFormat('#,##0.00', 'en_US').format(value);
+  }
+
+  String _formatPct(double pct) {
+    if (pct > 0 && pct < 1) return '<1';
+    return pct.toStringAsFixed(0);
   }
 
   void _showFdDetails(Map<String, dynamic> fd) {
@@ -198,10 +203,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           // ── Scan to Pay ──
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const QrScannerScreen()),
-              );
+              widget.onSwitchTab?.call(2);
             },
             child: _buildScanToPayCard(),
           ),
@@ -267,6 +269,121 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
+  void _showUtilizationDetails(CreditState credit) {
+    final pct = credit.utilizationPercent;
+    final healthColor = pct <= 30
+        ? AppTheme.healthGood
+        : pct <= 50
+            ? AppTheme.healthCaution
+            : AppTheme.healthHigh;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          padding: const EdgeInsets.all(24),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: AppTheme.dividerColor,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Text('Credit Utilization Health', style: AppTheme.headlineSm),
+                const SizedBox(height: 20),
+
+                // Gauge
+                Center(
+                  child: SizedBox(
+                    width: 120,
+                    height: 120,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        SizedBox(
+                          width: 120,
+                          height: 120,
+                          child: CircularProgressIndicator(
+                            value: (pct / 100).clamp(0.0, 1.0),
+                            strokeWidth: 10,
+                            backgroundColor: AppTheme.dividerColor,
+                            valueColor: AlwaysStoppedAnimation<Color>(healthColor),
+                          ),
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text('${_formatPct(pct)}%',
+                                style: AppTheme.headlineMd.copyWith(color: healthColor)),
+                            Text(credit.utilizationHealth,
+                                style: AppTheme.caption.copyWith(color: healthColor, fontWeight: FontWeight.w700)),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Breakdown
+                _detailRow('Total Credit Limit', '\$${_formatCurrency(credit.totalCreditLimit)}'),
+                _detailRow('Used Balance', '\$${_formatCurrency(credit.usedBalance)}'),
+                _detailRow('Available Credit', '\$${_formatCurrency(credit.available)}', isPositive: true),
+                const Divider(height: 24),
+
+                // Tips
+                Text('CREDIT HEALTH TIPS', style: AppTheme.labelUppercase),
+                const SizedBox(height: 12),
+                _tipRow(Icons.check_circle, 'Keep utilization under 30% for Excellent rating',
+                    pct <= 30 ? AppTheme.healthGood : AppTheme.textTertiary),
+                _tipRow(Icons.trending_up, 'Add more FDs to increase your credit limit',
+                    AppTheme.primaryBlue),
+                _tipRow(Icons.payments_outlined, 'Pay off balances quickly to lower utilization',
+                    pct > 50 ? AppTheme.healthHigh : AppTheme.textTertiary),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Got it'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _tipRow(IconData icon, String text, Color iconColor) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        children: [
+          Icon(icon, size: 18, color: iconColor),
+          const SizedBox(width: 10),
+          Expanded(child: Text(text, style: AppTheme.bodySm)),
+        ],
+      ),
+    );
+  }
+
   Widget _buildUtilizationCard(CreditState credit) {
     final pct = credit.utilizationPercent;
     final health = credit.utilizationHealth;
@@ -276,49 +393,52 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             ? AppTheme.healthCaution
             : AppTheme.healthHigh;
 
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: AppTheme.cardWhite,
-        borderRadius: BorderRadius.circular(AppTheme.radiusXl),
-        boxShadow: AppTheme.cardShadow,
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.shield_outlined,
-              color: AppTheme.textTertiary, size: 18),
-          const SizedBox(width: 8),
-          Text('UTILIZATION HEALTH', style: AppTheme.labelUppercase),
-          const Spacer(),
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: healthColor, width: 3),
+    return GestureDetector(
+      onTap: () => _showUtilizationDetails(credit),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppTheme.cardWhite,
+          borderRadius: BorderRadius.circular(AppTheme.radiusXl),
+          boxShadow: AppTheme.cardShadow,
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.shield_outlined,
+                color: AppTheme.textTertiary, size: 18),
+            const SizedBox(width: 8),
+            Text('UTILIZATION HEALTH', style: AppTheme.labelUppercase),
+            const Spacer(),
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: healthColor, width: 3),
+              ),
+              child: Center(
+                child: Text(health.substring(0, 1),
+                    style: AppTheme.caption.copyWith(
+                        color: healthColor,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14)),
+              ),
             ),
-            child: Center(
-              child: Text(health.substring(0, 1),
-                  style: AppTheme.caption.copyWith(
-                      color: healthColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14)),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('${_formatPct(pct)}% Utilized',
+                    style: AppTheme.titleSm),
+                Text(
+                    pct <= 30
+                        ? 'Excellent standing'
+                        : 'Keep under 30% for Excellent',
+                    style: AppTheme.caption),
+              ],
             ),
-          ),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('${pct.toStringAsFixed(0)}% Utilized',
-                  style: AppTheme.titleSm),
-              Text(
-                  pct <= 30
-                      ? 'Excellent standing'
-                      : 'Keep under 30% for Excellent',
-                  style: AppTheme.caption),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -413,6 +533,18 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           const SizedBox(height: 16),
           if (fdListState.isLoading)
             const Center(child: CircularProgressIndicator())
+          else if (fdListState.error != null)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(fdListState.error!, style: AppTheme.caption.copyWith(color: AppTheme.healthHigh)),
+                const SizedBox(height: 8),
+                GestureDetector(
+                  onTap: () => ref.read(fdListProvider.notifier).fetchFds(),
+                  child: Text('Tap to retry', style: AppTheme.bodySm.copyWith(color: AppTheme.primaryBlue, fontWeight: FontWeight.w600)),
+                ),
+              ],
+            )
           else if (fdListState.fds.isEmpty)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -509,10 +641,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             Text('Recent Activity', style: AppTheme.headlineSm),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const HistoryScreen()),
-                );
+                widget.onSwitchTab?.call(3);
               },
               child: Text('View Ledger  >',
                   style: AppTheme.bodySm.copyWith(

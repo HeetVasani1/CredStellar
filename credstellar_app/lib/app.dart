@@ -21,11 +21,11 @@ class AppShell extends ConsumerStatefulWidget {
 class _AppShellState extends ConsumerState<AppShell> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = const [
-    DashboardScreen(),
-    CreditManagementScreen(),
-    QrScannerScreen(),
-    HistoryScreen(),
+  List<Widget> get _screens => [
+    DashboardScreen(onSwitchTab: _onTabChanged),
+    const CreditManagementScreen(),
+    const QrScannerScreen(),
+    const HistoryScreen(),
   ];
 
   void _onTabChanged(int index) {

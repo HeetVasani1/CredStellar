@@ -36,49 +36,60 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   AuthNotifier(this._authService) : super(const AuthState());
 
-  /// Login with email and password
+  /// Login with email and password (auto-retries once on timeout)
   Future<bool> login(String email, String password) async {
     state = state.copyWith(isLoading: true, error: null);
-    try {
-      final data = await _authService.login(
-        email: email,
-        password: password,
-      );
-      state = AuthState(
-        isAuthenticated: true,
-        user: data['user'] as Map<String, dynamic>?,
-      );
-      return true;
-    } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString().replaceFirst('Exception: ', ''),
-      );
-      return false;
+    for (int attempt = 0; attempt < 2; attempt++) {
+      try {
+        final data = await _authService.login(
+          email: email,
+          password: password,
+        );
+        state = AuthState(
+          isAuthenticated: true,
+          user: data['user'] as Map<String, dynamic>?,
+        );
+        return true;
+      } catch (e) {
+        final msg = e.toString().replaceFirst('Exception: ', '');
+        final isTimeout = msg.contains('waking up');
+        if (isTimeout && attempt == 0) {
+          // Silent retry — server was cold-starting
+          continue;
+        }
+        state = state.copyWith(isLoading: false, error: msg);
+        return false;
+      }
     }
+    return false;
   }
 
-  /// Signup with email, password, full_name
+  /// Signup with email, password, full_name (auto-retries once on timeout)
   Future<bool> signup(String email, String password, String fullName) async {
     state = state.copyWith(isLoading: true, error: null);
-    try {
-      final data = await _authService.signup(
-        email: email,
-        password: password,
-        fullName: fullName,
-      );
-      state = AuthState(
-        isAuthenticated: true,
-        user: data['user'] as Map<String, dynamic>?,
-      );
-      return true;
-    } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString().replaceFirst('Exception: ', ''),
-      );
-      return false;
+    for (int attempt = 0; attempt < 2; attempt++) {
+      try {
+        final data = await _authService.signup(
+          email: email,
+          password: password,
+          fullName: fullName,
+        );
+        state = AuthState(
+          isAuthenticated: true,
+          user: data['user'] as Map<String, dynamic>?,
+        );
+        return true;
+      } catch (e) {
+        final msg = e.toString().replaceFirst('Exception: ', '');
+        final isTimeout = msg.contains('waking up');
+        if (isTimeout && attempt == 0) {
+          continue;
+        }
+        state = state.copyWith(isLoading: false, error: msg);
+        return false;
+      }
     }
+    return false;
   }
 
   /// Logout — clear state and token

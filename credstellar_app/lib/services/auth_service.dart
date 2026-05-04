@@ -75,10 +75,10 @@ class AuthService {
     }
     if (e.type == DioExceptionType.connectionTimeout ||
         e.type == DioExceptionType.receiveTimeout) {
-      return 'Connection timed out. Check your network.';
+      return 'Server is waking up — please try again in a few seconds.';
     }
     if (e.type == DioExceptionType.connectionError) {
-      return 'Cannot connect to server. Is the backend running?';
+      return 'Server is waking up — please try again in a few seconds.';
     }
     return 'Something went wrong. Please try again.';
   }

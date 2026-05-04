@@ -48,8 +48,10 @@ class FdService {
     if (e.response?.data != null && e.response!.data is Map) {
       return e.response!.data['error']?.toString() ?? 'Request failed.';
     }
-    if (e.type == DioExceptionType.connectionError) {
-      return 'Cannot connect to server.';
+    if (e.type == DioExceptionType.connectionTimeout ||
+        e.type == DioExceptionType.receiveTimeout ||
+        e.type == DioExceptionType.connectionError) {
+      return 'Server is waking up — please try again in a few seconds.';
     }
     return 'Something went wrong. Please try again.';
   }
